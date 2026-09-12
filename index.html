@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>RAINHOOD — NFT Collection</title>
+
+<meta name="description" content="RAINHOOD — A collection of digital characters built on Robinhood Chain.">
+
+<style>
+:root {
+    --bg: #050505;
+    --card: #0d0d0d;
+    --card2: #111111;
+    --text: #ffffff;
+    --muted: #929292;
+    --red: #ff2d2d;
+    --border: rgba(255,255,255,0.09);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+img {
+    display: block;
+    width: 100%;
+}
+
+/* =========================
+   INTRO ANIMATION
+========================= */
+
+.intro {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: #050505;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    animation: introHide 1s ease 3.2s forwards;
+    pointer-events: none;
+}
+
+.door {
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    background: #9d0000;
+    z-index: 1;
+}
+
+.door.left {
+    left: 0;
+    animation: leftDoor 1.8s cubic-bezier(.77,0,.18,1) 1.1s forwards;
+}
+
+.door.right {
+    right: 0;
+    animation: rightDoor 1.8s cubic-bezier(.77,0,.18,1) 1.1s forwards;
+}
+
+.intro-title {
+    position: relative;
+    z-index: 2;
+    font-size: clamp(40px, 9vw, 110px);
+    font-weight: 900;
+    letter-spacing: 12px;
+    opacity: 0;
+    animation: titleShow 1s ease .5s forwards;
+}
+
+@keyframes leftDoor {
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes rightDoor {
+    to {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes titleShow {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes introHide {
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    backdrop-filter: blur(18px);
+    background: rgba(5,5,5,.72);
+    border-bottom: 1px solid var(--border);
+}
+
+.nav {
+    max-width: 1200px;
+    margin: auto;
+    padding: 18px 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: 900;
+    letter-spacing: 4px;
+}
+
+.logo span {
+    color: var(--red);
+}
+
+.nav-links {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+}
+
+.nav-links a {
+    color: #aaa;
+    font-size: 14px;
+    transition: .2s;
+}
+
+.nav-links a:hover {
+    color: white;
+}
+
+.x-button {
+    border: 1px solid var(--border);
+    padding: 9px 15px;
+    border-radius: 8px;
+}
+
+/* =========================
+   GENERAL
+========================= */
+
+section {
+    padding: 110px 25px;
+}
+
+.wrap {
+    max-width: 1200px;
+    margin: auto;
+}
+
+.section-kicker {
+    color: var(--red);
+    font-size: 12px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.section-title {
+    font-size: clamp(35px, 6vw, 65px);
+    font-weight: 900;
+    line-height: 1;
+}
+
+.red {
+    color: var(--red);
+}
+
+.muted {
+    color: var(--muted);
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    min-height: 100vh;
+    padding-top: 150px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(255,0,0,.16), transparent 65%);
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+}
+
+.hero-grid {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 70px;
+    align-items: center;
+}
+
+.hero h1 {
+    font-size: clamp(55px, 8vw, 105px);
+    line-height: .88;
+    letter-spacing: -4px;
+    font-weight: 900;
+}
+
+.hero h1 span {
+    color: var(--red);
+}
+
+.hero-text {
+    margin-top: 25px;
+    max-width: 520px;
+    color: #999;
+    font-size: 17px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 35px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 14px 23px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 14px;
+    transition: .2s;
+}
+
+.btn-primary {
+    background: var(--red);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    border: 1px solid var(--border);
+}
+
+.hero-art {
+    position: relative;
+}
+
+.hero-art img {
+    max-height: 650px;
+    object-fit: cover;
+    border-radius: 18px;
+    border: 1px solid var(--border);
+    box-shadow: 0 30px 100px rgba(255,0,0,.12);
+}
+
+/* =========================
+   STATS
+========================= */
+
+.stats {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 0 25px;
+}
+
+.stats-grid {
+    max-width: 1200px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.stat {
+    padding: 30px 20px;
+    border-right: 1px solid var(--border);
+}
+
+.stat:last-child {
+    border-right: none;
+}
+
+.stat small {
+    display: block;
+    color: #777;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 10px;
+    margin-bottom: 8px;
+}
+
+.stat strong {
+    font-size: 22px;
+}
+
+/* =========================
+   ABOUT
+========================= */
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+}
+
+.about-text {
+    color: #999;
+    font-size: 17px;
+    max-width: 650px;
+}
+
+.about-text p {
+    margin-bottom: 20px;
+}
+
+/* =========================
+   COLLECTION
+========================= */
+
+.section-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    align-items: end;
+    margin-bottom: 45px;
+}
+
+.section-head p {
+    max-width: 420px;
+    color: #777;
+}
+
+.collection {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+
+.nft {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: .3s;
+}
+
+.nft:hover {
+    transform: translateY(-7px);
+    border-color: rgba(255,255,255,.2);
+}
+
+.nft img {
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+.nft-info {
+    padding: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.nft-info small {
+    color: #666;
+    display: block;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.nft-info strong {
+    font-size: 15px;
+}
+
+.rarity {
+    color: var(--red);
+}
+
+/* =========================
+   ROADMAP
+========================= */
+
+.roadmap {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-top: 50px;
+}
+
+.roadmap-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 30px 24px;
+    border-radius: 12px;
+    min-height: 220px;
+}
+
+.roadmap-number {
+    font-size: 12px;
+    color: var(--red);
+    letter-spacing: 3px;
+    margin-bottom: 25px;
+}
+
+.roadmap-card h3 {
+    margin-bottom: 12px;
+    font-size: 20px;
+}
+
+.roadmap-card p {
+    color: #777;
+    font-size: 14px;
+}
+
+/* =========================
+   CHAIN
+========================= */
+
+.chain-box {
+    margin-top: 45px;
+    padding: 45px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background:
+        radial-gradient(circle at top right, rgba(255,0,0,.1), transparent 45%),
+        var(--card);
+}
+
+.chain-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 35px;
+}
+
+.chain-item {
+    padding: 20px;
+    border-right: 1px solid var(--border);
+}
+
+.chain-item:last-child {
+    border-right: none;
+}
+
+.chain-item small {
+    color: #666;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.chain-item strong {
+    font-size: 18px;
+}
+
+/* =========================
+   FAQ
+========================= */
+
+.faq {
+    max-width: 850px;
+    margin: 45px auto 0;
+}
+
+details {
+    border-bottom: 1px solid var(--border);
+    padding: 23px 0;
+}
+
+summary {
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 17px;
+}
+
+details p {
+    color: #888;
+    padding-top: 15px;
+    max-width: 700px;
+}
+
+/* =========================
+   CTA
+========================= */
+
+.cta {
+    text-align: center;
+    padding: 140px 25px;
+    border-top: 1px solid var(--border);
+}
+
+.cta h2 {
+    font-size: clamp(45px, 7vw, 80px);
+    line-height: .95;
+}
+
+.cta p {
+    color: #777;
+    max-width: 550px;
+    margin: 20px auto 30px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    border-top: 1px solid var(--border);
+    padding: 30px 25px;
+}
+
+.footer-inner {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.footer-inner p {
+    color: #555;
+    font-size: 12px;
+    max-width: 750px;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 900px) {
+
+    .nav-links a:not(.x-button) {
+        display: none;
+    }
+
+    .hero-grid,
+    .about-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero {
+        padding-top: 130px;
+    }
+
+    .hero-art {
+        max-width: 600px;
+        margin: auto;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .stat:nth-child(2) {
+        border-right: none;
+    }
+
+    .collection {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .roadmap {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .chain-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .chain-item {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .chain-item:last-child {
+        border-bottom: none;
+    }
+}
+
+@media (max-width: 550px) {
+
+    section {
+        padding: 80px 18px;
+    }
+
+    .hero h1 {
+        letter-spacing: -2px;
+    }
+
+    .stats {
+        padding: 0 18px;
+    }
+
+    .collection,
+    .roadmap {
+        grid-template-columns: 1fr;
+    }
+
+    .section-head {
+        display: block;
+    }
+
+    .section-head p {
+        margin-top: 20px;
+    }
+
+    .chain-box {
+        padding: 25px;
+    }
+
+    .footer-inner {
+        flex-direction: column;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     INTRO
+========================= -->
+
+<div class="intro">
+    <div class="door left"></div>
+    <div class="door right"></div>
+    <div class="intro-title">RAINHOOD</div>
+</div>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+    <nav class="nav">
+
+        <a href="#" class="logo">
+            RAIN<span>HOOD</span>
+        </a>
+
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#collection">Collection</a>
+            <a href="#roadmap">Roadmap</a>
+            <a href="#faq">FAQ</a>
+
+            <!-- CHANGE X LINK HERE -->
+            <a
+                href="https://x.com/rainhood1000"
+                target="_blank"
+                class="x-button"
+            >
+                Follow on X
+            </a>
+        </div>
+
+    </nav>
+</header>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+    <div class="wrap hero-grid">
+
+        <div>
+
+            <div class="section-kicker">
+                Digital Collectibles
+            </div>
+
+            <h1>
+                RAINHOOD<br>
+                <span>UNIVERSE.</span>
+            </h1>
+
+            <p class="hero-text">
+                A collection of unique digital characters,
+                built for the next generation of onchain culture.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="#collection" class="btn btn-primary">
+                    Explore Collection
+                </a>
+
+                <a
+                    href="https://x.com/rainhood1000"
+                    target="_blank"
+                    class="btn btn-secondary"
+                >
+                    Follow Rainhood
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="hero-art">
+
+            <!-- HERO IMAGE -->
+            <!-- Change this image whenever you want -->
+
+            <img
+                src="assets/nft-001-blue.jpg"
+                alt="Rainhood #001 Blue Energy"
+            >
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     STATS
+========================= -->
+
+<div class="stats">
+
+    <div class="stats-grid">
+
+        <div class="stat">
+            <small>Total Supply</small>
+            <strong>1,000</strong>
+        </div>
+
+        <div class="stat">
+            <small>Planned Mint Price</small>
+            <strong>$2</strong>
+        </div>
+
+        <div class="stat">
+            <small>Blockchain</small>
+            <strong>Robinhood Chain</strong>
+        </div>
+
+        <div class="stat">
+            <small>Contract Address</small>
+            <strong>TBA</strong>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     ABOUT
+========================= -->
+
+<section id="about">
+
+    <div class="wrap about-grid">
+
+        <div>
+
+            <div class="section-kicker">
+                About Rainhood
+            </div>
+
+            <div class="section-title">
+                Welcome to the<br>
+                <span class="red">Hood.</span>
+            </div>
+
+        </div>
+
+        <div class="about-text">
+
+            <p>
+                Rainhood is an independent digital collectible
+                project focused on building a recognizable universe
+                of unique characters.
+            </p>
+
+            <p>
+                Each character represents a different energy,
+                personality and visual identity inside the
+                Rainhood universe.
+            </p>
+
+            <p>
+                The project is being built on Robinhood Chain,
+                an Ethereum-compatible Layer 2 network.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     COLLECTION
+========================= -->
+
+<section id="collection">
+
+    <div class="wrap">
+
+        <div class="section-head">
+
+            <div>
+
+                <div class="section-kicker">
+                    Featured Collection
+                </div>
+
+                <div class="section-title">
+                    Meet the <span class="red">hoods.</span>
+                </div>
+
+            </div>
+
+            <p>
+                Genesis previews from the Rainhood universe.
+                More characters and traits can be revealed as
+                the project develops.
+            </p>
+
+        </div>
+
+
+        <div class="collection">
+
+
+            <!-- #001 -->
+
+            <article class="nft">
+
+                <img
+                    src="assets/nft-001-blue.jpg"
+                    alt="Rainhood #001 Blue Energy"
+                >
+
+                <div class="nft-info">
+
+                    <div>
+                        <small>Genesis</small>
+                        <strong>#001</strong>
+                    </div>
+
+                    <strong class="rarity">
+                        BLUE ENERGY
+                    </strong>
+
+                </div>
+
+            </article>
+
+
+            <!-- #002 -->
+
+            <article class="nft">
+
+                <img
+                    src="assets/nft-002-red.jpg"
+                    alt="Rainhood #002 Red Energy"
+                >
+
+                <div class="nft-info">
+
+                    <div>
+                        <small>Genesis</small>
+                        <strong>#002</strong>
+                    </div>
+
+                    <strong class="rarity">
+                        RED ENERGY
+                    </strong>
+
+                </div>
+
+            </article>
+
+
+            <!-- #003 -->
+
+            <article class="nft">
+
+                <img
+                    src="assets/nft-003-purple.jpg"
+                    alt="Rainhood #003 Purple Energy"
+                >
+
+                <div class="nft-info">
+
+                    <div>
+                        <small>New Variant</small>
+                        <strong>#003</strong>
+                    </div>
+
+                    <strong style="color:#b56cff;">
+                        PURPLE ENERGY
+                    </strong>
+
+                </div>
+
+            </article>
+
+
+            <!-- #004 -->
+
+            <article class="nft">
+
+                <img
+                    src="assets/nft-004-green.jpg"
+                    alt="Rainhood #004 Green Energy"
+                >
+
+                <div class="nft-info">
+
+                    <div>
+                        <small>New Variant</small>
+                        <strong>#004</strong>
+                    </div>
+
+                    <strong style="color:#5cff91;">
+                        GREEN ENERGY
+                    </strong>
+
+                </div>
+
+            </article>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     ROADMAP
+========================= -->
+
+<section id="roadmap">
+
+    <div class="wrap">
+
+        <div class="section-kicker">
+            Roadmap
+        </div>
+
+        <div class="section-title">
+            Building the <span class="red">universe.</span>
+        </div>
+
+
+        <div class="roadmap">
+
+
+            <div class="roadmap-card">
+
+                <div class="roadmap-number">
+                    01 — GENESIS
+                </div>
+
+                <h3>Foundation</h3>
+
+                <p>
+                    Establish the Rainhood identity,
+                    collection and community foundation.
+                </p>
+
+            </div>
+
+
+            <div class="roadmap-card">
+
+                <div class="roadmap-number">
+                    02 — COMMUNITY
+                </div>
+
+                <h3>Build Together</h3>
+
+                <p>
+                    Grow the community and introduce
+                    new characters, ideas and collaborations.
+                </p>
+
+            </div>
+
+
+            <div class="roadmap-card">
+
+                <div class="roadmap-number">
+                    03 — LAUNCH
+                </div>
+
+                <h3>Onchain</h3>
+
+                <p>
+                    Prepare the collection for its
+                    onchain launch and public release.
+                </p>
+
+            </div>
+
+
+            <div class="roadmap-card">
+
+                <div class="roadmap-number">
+                    04 — BEYOND
+                </div>
+
+                <h3>Expand</h3>
+
+                <p>
+                    Continue expanding the Rainhood universe
+                    with new experiences and characters.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     ROBINHOOD CHAIN
+========================= -->
+
+<section>
+
+    <div class="wrap">
+
+        <div class="section-kicker">
+            Blockchain
+        </div>
+
+        <div class="section-title">
+            Built on <span class="red">Robinhood Chain.</span>
+        </div>
+
+
+        <div class="chain-box">
+
+            <p class="muted">
+                Rainhood is being built as an independent project
+                on Robinhood Chain.
+            </p>
+
+
+            <div class="chain-grid">
+
+                <div class="chain-item">
+
+                    <small>Network</small>
+
+                    <strong>
+                        Robinhood Chain
+                    </strong>
+
+                </div>
+
+
+                <div class="chain-item">
+
+                    <small>Gas Token</small>
+
+                    <strong>
+                        ETH
+                    </strong>
+
+                </div>
+
+
+                <div class="chain-item">
+
+                    <small>Contract</small>
+
+                    <strong>
+                        TBA
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     FAQ
+========================= -->
+
+<section id="faq">
+
+    <div class="wrap">
+
+        <div class="section-kicker">
+            FAQ
+        </div>
+
+        <div class="section-title">
+            Questions?
+        </div>
+
+
+        <div class="faq">
+
+
+            <details>
+
+                <summary>
+                    What is Rainhood?
+                </summary>
+
+                <p>
+                    Rainhood is an independent digital collectible
+                    project featuring a collection of unique
+                    hooded characters.
+                </p>
+
+            </details>
+
+
+            <details>
+
+                <summary>
+                    How many NFTs will there be?
+                </summary>
+
+                <p>
+                    The planned collection supply is 1,000 NFTs.
+                </p>
+
+            </details>
+
+
+            <details>
+
+                <summary>
+                    What is the planned mint price?
+                </summary>
+
+                <p>
+                    The current planned mint price is $2.
+                    This may change before launch.
+                </p>
+
+            </details>
+
+
+            <details>
+
+                <summary>
+                    What blockchain is Rainhood using?
+                </summary>
+
+                <p>
+                    Rainhood is being built on Robinhood Chain.
+                </p>
+
+            </details>
+
+
+            <details>
+
+                <summary>
+                    Is the contract deployed?
+                </summary>
+
+                <p>
+                    Not yet. The contract address will be
+                    published here once it is deployed and verified.
+                </p>
+
+            </details>
+
+
+            <details>
+
+                <summary>
+                    Is Rainhood officially affiliated with Robinhood?
+                </summary>
+
+                <p>
+                    No. Rainhood is an independent project and is
+                    not affiliated with, sponsored by, or endorsed
+                    by Robinhood or Robinhood Chain.
+                </p>
+
+            </details>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     CTA
+========================= -->
+
+<section class="cta">
+
+    <div class="wrap">
+
+        <div class="section-kicker">
+            Join the Hood
+        </div>
+
+        <h2>
+            FOLLOW THE<br>
+            <span class="red">RAIN.</span>
+        </h2>
+
+        <p>
+            Follow Rainhood on X for project updates,
+            collection reveals and future announcements.
+        </p>
+
+        <a
+            href="https://x.com/rainhood1000"
+            target="_blank"
+            class="btn btn-primary"
+        >
+            Follow on X
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <div class="footer-inner">
+
+        <div class="logo">
+            RAIN<span>HOOD</span>
+        </div>
+
+        <p>
+            Rainhood is an independent project and is not affiliated
+            with, sponsored by, or endorsed by Robinhood Markets,
+            Robinhood Digital Assets, LLC, or Robinhood Chain.
+            “Robinhood Chain” is used only to accurately identify
+            the network on which the project is being built.
+        </p>
+
+        <p>
+            © 2026 Rainhood
+        </p>
+
+    </div>
+
+</footer>
+
+</body>
+</html>
